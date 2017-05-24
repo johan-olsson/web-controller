@@ -1,0 +1,22 @@
+{
+  "name": "web-controller",
+  "version": "0.0.1",
+  "description": "Tiny library for building web components",
+  "main": "dist/index.js",
+  "files": "dist/index.js",
+  "scripts": {
+    "build": "browserify src/index.js -t [ babelify --presets [ env ] ] | uglifyjs > dist/index.js"
+  },
+  "author": "Johan Olsson",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "babelify": "^7.3.0",
+    "browserify": "^14.3.0",
+    "uglify-js": "^3.0.11"
+  },
+  "dependencies": {
+    "diff-renderer": "^0.1.1"
+  }
+}
