@@ -2,7 +2,7 @@
 
 const Controller = require('./Controller')
 
-module.exports = class WebController {
+window.WebController = class WebController {
 
   constructor(name, options = {}) {
 
