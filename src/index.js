@@ -1,8 +1,8 @@
 'use strict'
 
-const WebController = require('./WebController')
+const Controller = require('./Controller')
 
-module.exports = class WebComponent {
+module.exports = class WebController {
 
   constructor(name, options = {}) {
 
