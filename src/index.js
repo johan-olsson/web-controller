@@ -6,16 +6,10 @@ window.WebController = class WebController {
 
   constructor(name, options = {}) {
 
-    const root = document.currentScript.parentElement
-
+    const script = document.currentScript
     const ComponentElement = class ComponentElement extends HTMLElement {
 
       createdCallback() {
-
-        this.component = new WebController(Object.assign(options, {
-          element: this,
-          root
-        }))
 
         if (options.constructor) {
           options.constructor.call(this.component)
@@ -27,6 +21,8 @@ window.WebController = class WebController {
       }
 
       attachedCallback() {
+
+        let first = true
 
         const observer = new MutationObserver((mutations) => {
           mutations.forEach((mutation) => {
@@ -41,19 +37,26 @@ window.WebController = class WebController {
                       .call(this.component, event)
                   })
                 })
+
             })
           })
+
+          if (options.componentDidMount && first) {
+            options.componentDidMount.call(this.component)
+            first = false
+          }
         })
+
+        this.component = new Controller(Object.assign(options, {
+          element: this,
+          root: script.parentElement
+        }))
 
         observer.observe(this.shadowRoot, {
           childList: true
         })
 
         this.component.redraw()
-
-        if (options.componentDidMount) {
-          options.componentDidMount.call(this.component)
-        }
       }
 
       detachedCallback() {
